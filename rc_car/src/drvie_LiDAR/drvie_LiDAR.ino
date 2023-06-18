@@ -1,4 +1,4 @@
-3#include "Arduino.h"
+#include "Arduino.h"
 #include <ros.h>
 #include <std_msgs/Int32.h>
 
@@ -21,7 +21,7 @@ void callback(const std_msgs::Int32& sub_lidar){
   distance=sub_lidar.data;
   
   
-  if (distance < 10){ //stop
+  if (distance < 30){ //lidar로부터 측정 거리가 30cm미만일 경우 -> stop
     Serial.println("stop");
     
     digitalWrite(left_1,LOW);
@@ -35,7 +35,7 @@ void callback(const std_msgs::Int32& sub_lidar){
     
     delay(100);
   }
-  else if (distance >= 10) {//go
+  else if (distance >= 30) { //lidar로부터 측정 거리가 30cm 이상일 경우 -> go
     Serial.println("go");
 
     digitalWrite(left_1,LOW);
